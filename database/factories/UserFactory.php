@@ -43,6 +43,7 @@ class UserFactory extends Factory
 
         if ($role == 'creador_eventos') {
             $attributes['company_id'] = Company::inRandomOrder()->first()->id;
+            $attributes['position'] = $this->faker->jobTitle();
         }
 
         return $attributes;

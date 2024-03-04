@@ -46,7 +46,7 @@ class User extends Authenticatable
     // Relaciones
 
     /**
-     * Eventos creados por el usuario creador_eventos.
+     * Eventos creados por el creador de eventos.
      */
     public function createdEvents()
     {
@@ -62,17 +62,17 @@ class User extends Authenticatable
     }
 
     /**
-     * Inscripciones del usuario a eventos (si es un asistente).
+     * Inscripciones del usuario a eventos.
      */
     public function registrations()
     {
         return $this->hasMany(Registration::class, 'attendee_id');
     }
 
-    // ROLES
+    // ROLES DEL USUARIO
 
     /**
-     * Determina si el usuario es un asistente.
+     *  Asistente
      *
      * @return bool
      */
@@ -82,7 +82,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Determina si el usuario es creador de eventos.
+     * Creador de eventos
      *
      * @return bool
      */
@@ -92,7 +92,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Determina si el usuario es el Admin.
+     * Administrador
      *
      * @return bool
      */

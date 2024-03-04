@@ -12,6 +12,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+    <script src="//unpkg.com/alpinejs@2.8.0/dist/alpine.js" defer></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50 dark:bg-gray-200 font-sans antialiased">
@@ -19,17 +21,16 @@
         @include('components.navbar')
 
         <!-- Page Heading -->
-        @if (isset($header))
         <header class="bg-white dark:bg-gray-400 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+                @yield('header') {{-- Simplemente utiliza @yield aquí --}}
             </div>
         </header>
-        @endif
+
 
         <!-- Page Content -->
         <main>
-            {{ $slot }}
+            @yield('content')
         </main>
     </div>
     <x-footer />

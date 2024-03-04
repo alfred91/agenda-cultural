@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,8 +39,17 @@ class UsersTableSeeder extends Seeder
                 'city' => 'Asistente City',
                 'phone' => '600300400',
                 'role' => 'asistente',
-            ],
-            [
+            ]
+        ];
+
+        foreach ($fixedUsers as $user) {
+            User::create($user);
+        }
+
+        if (Company::count() > 0) {
+            $company_id = Company::inRandomOrder()->first()->id;
+
+            User::create([
                 'dni' => '22222222X',
                 'name' => 'Creador',
                 'surname' => 'Eventos',
@@ -50,11 +60,9 @@ class UsersTableSeeder extends Seeder
                 'city' => 'Creador City',
                 'phone' => '600500600',
                 'role' => 'creador_eventos',
-            ]
-        ];
-
-        foreach ($fixedUsers as $user) {
-            User::create($user);
+                'company_id' => $company_id,
+                'position' => 'Event_Manager',
+            ]);
         }
 
         // 20 usuarios de prueba
