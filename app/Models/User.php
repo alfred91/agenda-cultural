@@ -66,7 +66,7 @@ class User extends Authenticatable
      */
     public function registrations()
     {
-        return $this->hasMany(Registration::class, 'attendee_id');
+        return $this->hasMany(Registration::class);
     }
 
     // ROLES DEL USUARIO

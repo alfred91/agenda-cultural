@@ -1,29 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Creator;
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Event;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
-class EventManagementController extends Controller
+class CreatorEventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $events = Event::paginate(5);
+        $events = Event::where('user_id', auth()->id())->get();
         $categories = Category::all();
-        return view('admin.events', compact('events', 'categories'));
+        return view('creator.events', compact('events', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -48,19 +44,14 @@ class EventManagementController extends Controller
             $eventData['image'] = basename($imagePath);
         }
 
-
-        // Añade el ID del usuario que crea el evento
         $eventData['user_id'] = auth()->id();
 
         Event::create($eventData);
 
-        return redirect()->route('admin.events')->with('success', 'Evento creado con éxito.');
+        return redirect()->route('creator.events')->with('success', 'Evento creado con éxito.');
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $event = Event::findOrFail($id);
@@ -68,9 +59,6 @@ class EventManagementController extends Controller
         return response()->json($event);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Event $event)
     {
         $eventData = $request->except(['image']);
@@ -82,17 +70,14 @@ class EventManagementController extends Controller
 
         $event->update($eventData);
 
-        return redirect()->route('admin.events')->with('success', 'Evento actualizado con éxito');
+        return redirect()->route('creator.events')->with('success', 'Evento actualizado con éxito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
-        $event->delete();
+        $event->update(['status' => 'cancelled']);
 
-        return redirect()->route('admin.events')->with('success', 'Evento eliminado con éxito.');
+        return redirect()->route('creator.events')->with('success', 'Evento cancelado con éxito.');
     }
 }

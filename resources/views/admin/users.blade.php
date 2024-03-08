@@ -2,7 +2,7 @@
 
 @section('header')
 <h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
-    {{ __('Usuarios Admin') }}
+    {{ __('Usuarios') }}
 </h2>
 @endsection
 
@@ -31,8 +31,8 @@
                 })->toArray();
                 @endphp
 
-                <x-responsive-table :headers="$userHeaders" :rows="$userRows" />
                 {{ $users->links() }}
+                <x-responsive-table :headers="$userHeaders" :rows="$userRows" />
 
             </div>
 

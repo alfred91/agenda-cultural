@@ -8,12 +8,13 @@
                     <input type="text" name="name" id="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm text-black">
                 </div>
                 <div class="mt-6">
-                    <button type="submit" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
-                        Crear
-                    </button>
-                    <button type="button" @click="isOpen = false" class="ml-4 inline-flex justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    <x-danger-button type="button" @click="isOpen = false">
                         Cancelar
-                    </button>
+                    </x-danger-button>
+                    <x-secondary-button type="submit">
+                        Añadir
+                    </x-secondary-button>
+
                 </div>
             </form>
         </div>

@@ -1,9 +1,9 @@
-<div x-show="isOpenAddEventModal" class="fixed inset-0 bg-gray-800 bg-opacity-40 overflow-y-auto h-full w-full z-10" x-cloak @click.away="isOpenAddEventModal = false">
+<div x-show="isOpenAddEventModal" x-cloak class="fixed inset-0 bg-gray-800 bg-opacity-40 overflow-y-auto h-full w-full z-10" @click.away="isOpenAddEventModal = false">
     <div class="flex items-center justify-center min-h-screen p-4">
         <div class="relative w-full max-w-lg mx-auto bg-white rounded-lg shadow-xl">
             <div class="p-6">
                 <h3 class="text-2xl font-semibold text-center text-gray-900 mb-4">Añadir Evento</h3>
-                <form method="POST" action="{{ route('admin.events.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route($route) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="space-y-4 w-auto">
                         <div>
@@ -68,7 +68,7 @@
                             <x-danger-button type="button" @click="isOpenAddEventModal = false">
                                 Cancelar
                             </x-danger-button>
-                            <x-secondary-button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <x-secondary-button type="submit">
                                 Crear Evento
                             </x-secondary-button>
                         </div>

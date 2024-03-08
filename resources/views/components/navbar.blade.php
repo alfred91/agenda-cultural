@@ -4,9 +4,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('index') }}">
-                        <x-application-logo class="block h-10 w-auto text-gray-400" />
-                    </a>
+                    <x-application-logo class="block h-10 w-auto text-gray-400" />
                 </div>
 
                 <!-- NAVBAR DINAMICO, POR ROLES -->
@@ -18,51 +16,33 @@
                     <x-nav-link :href="route('admin.events')" :active="request()->routeIs('admin.events')">
                         {{ __('Eventos') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users.*')">
+                    <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.category')" :active="request()->routeIs('admin.category.*')">
+                    <x-nav-link :href="route('admin.category')" :active="request()->routeIs('admin.category')">
                         {{ __('Categoría') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.experiences')" :active="request()->routeIs('admin.experiences.*')">
+                    <x-nav-link :href="route('admin.experiences')" :active="request()->routeIs('admin.experiences')">
                         {{ __('Experiencias') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.company')" :active="request()->routeIs('admin.company.*')">
+                    <x-nav-link :href="route('admin.company')" :active="request()->routeIs('admin.company')">
                         {{ __('Empresas') }}
                     </x-nav-link>
                     @break
 
                     @case('creador_eventos')
-                    <x-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.dashboard')">
+                    <x-nav-link :href="route('creator.events')" :active="request()->routeIs('creator.events')">
                         {{ __('Mis Eventos') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.events')">
-                        {{ __('Crear') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.events')">
-                        {{ __('Ver Eventos') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.events')">
-                        {{ __('Eliminar Eventos o Inscripciones') }}
                     </x-nav-link>
                     @break
 
                     @default
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('user.agenda')" :active="request()->routeIs('user.agenda')">
                         {{ __('Inicio') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('agenda')">
-                        {{ __('Agenda') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('explora')">
-                        {{ __('Explora') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('experiencias')">
-                        {{ __('Expreriencias') }}
-                    </x-nav-link>
+
                     @endswitch
                     @endif
-                    <!-- Enlaces adicionales que son comunes a todos los roles -->
                 </div>
             </div>
             <!-- Settings Dropdown -->
@@ -89,7 +69,6 @@
                 @csrf
             </form>
 
-
             <!-- Mobile menu button -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-800 transition duration-150 ease-in-out">
@@ -108,21 +87,13 @@
             @if(auth()->check())
             @switch(auth()->user()->role)
             @case('creador_eventos')
-            <!-- Creador de eventos -->
+
+            <!-- CREADOR EVENTOS -->
             <x-responsive-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.dashboard')">
                 {{ __('Mis Eventos') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.create')">
-                {{ __('Crear Evento') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.dashboards')">
-                {{ __('Ver Eventos') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.dashboards')">
-                {{ __('Eliminar Eventos') }}
-            </x-responsive-nav-link>
 
-            <!-- Administrador -->
+            <!-- ADMINISTRADOR -->
             @break
             @case('administrador')
             <x-responsive-nav-link :href="route('admin.events')" :active="request()->routeIs('admin.events')">
@@ -141,21 +112,6 @@
                 {{ __('Empresas') }}
             </x-responsive-nav-link>
             @break
-            @default
-            <!-- Usuarios -->
-            <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('homepage')">
-                {{ __('Inicio') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('agenda')">
-                {{ __('Agenda') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('explore')">
-                {{ __('Explora') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('experiences')">
-                {{ __('Experiencias') }}
-            </x-responsive-nav-link>
-            <!-- Más enlaces accesibles para usuarios generales o asistentes -->
             @endswitch
             @endif
         </div>

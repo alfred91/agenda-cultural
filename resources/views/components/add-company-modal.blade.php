@@ -38,12 +38,12 @@
                 </div>
 
                 <div class="mt-6 flex justify-end space-x-3">
-                    <button type="button" @click="isOpen = false" class="inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <x-danger-button type="button" @click="isOpen = false">
                         Cancelar
-                    </button>
-                    <button type="submit" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    </x-danger-button>
+                    <x-secondary-button type="submit">
                         Crear
-                    </button>
+                    </x-secondary-button>
                 </div>
             </form>
         </div>

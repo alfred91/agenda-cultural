@@ -13,6 +13,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="{{ mix('/js/app.js') }}" defer></script>
+
 </head>
 <body class="bg-gray-50 dark:bg-gray-200 font-sans antialiased">
     <div class="min-h-screen">

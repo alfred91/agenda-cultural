@@ -1,10 +1,9 @@
-<div x-show="isOpen" @click.away="isOpen = false" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
+<div x-show="isOpenAddExperienceModal" class="fixed inset-0 bg-gray-800 bg-opacity-40 overflow-y-auto h-full w-full z-10" x-cloak @click.away="isOpenAddExperienceModal = false">
     <div class="flex items-center justify-center min-h-screen">
         <div class="bg-white rounded-lg overflow-hidden shadow-2xl transform transition-all max-w-lg w-full">
+            <h3 class="text-xl text-center font-semibold text-gray-900 mb-4">Añadir Experiencia</h3>
             <form method="POST" action="{{ route('admin.experiences.store') }}" enctype="multipart/form-data" class="p-6">
                 @csrf
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Añadir Experiencia</h3>
-
                 <div class="flex space-x-4">
                     <div class="w-1/2">
                         <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
@@ -45,24 +44,24 @@
                     </div>
                 </div>
 
-                <div class="flex space-x-4 mt-4">
-                    <div class="w-1/2">
-                        <label for="link" class="block text-sm font-medium text-gray-700">Link (opcional):</label>
-                        <input type="url" name="link" id="link" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div class="w-1/2">
-                        <label for="image" class="block text-sm font-medium text-gray-700">Imagen (opcional):</label>
-                        <input type="file" name="image" id="image" class="mt-1 block w-full">
-                    </div>
+
+                <div class="mt-4">
+                    <label for="link" class="block text-sm font-medium text-gray-700">Link:</label>
+                    <input type="url" name="link" id="link" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="mt-4">
+                    <label for="image" class="block text-sm font-medium text-gray-700">Imagen:</label>
+                    <input type="file" name="image" id="image" class="mt-1 block w-full">
                 </div>
 
+
                 <div class="mt-6 flex justify-end space-x-3">
-                    <button type="button" @click="isOpen = false" class="inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <x-danger-button type="button" @click="isOpenAddExperienceModal = false">
                         Cancelar
-                    </button>
-                    <button type="submit" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Guardar
-                    </button>
+                    </x-danger-button>
+                    <x-secondary-button type="submit">
+                        Añadir
+                    </x-secondary-button>
                 </div>
             </form>
         </div>

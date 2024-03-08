@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\API;
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Event;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EventManagementController extends Controller
+class EventApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $events = Event::paginate(5);
-        $categories = Category::all();
-        return view('admin.events', compact('events', 'categories'));
+        $events = Event::all();
+        return response()->json($events);
     }
 
     /**
@@ -33,7 +29,7 @@ class EventManagementController extends Controller
             'description' => 'required|string',
             'city' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'status' => 'created',
+            'status' => 'required|in:created',
             'max_capacity' => 'required|integer',
             'type' => 'required|in:online,presencial',
             'max_tickets_per_person' => 'required|integer',
@@ -48,41 +44,32 @@ class EventManagementController extends Controller
             $eventData['image'] = basename($imagePath);
         }
 
+        if (auth()->check()) {
+            $eventData['user_id'] = auth()->id();
+        } else {
+            return response()->json(['message' => 'No está autenticado.'], 401);
+        }
 
-        // Añade el ID del usuario que crea el evento
-        $eventData['user_id'] = auth()->id();
+        $event = Event::create($eventData);
 
-        Event::create($eventData);
-
-        return redirect()->route('admin.events')->with('success', 'Evento creado con éxito.');
+        return response()->json(['message' => 'Evento creado con éxito.', 'event' => $event], 201);
     }
 
-
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource.
      */
-    public function edit($id)
+    public function show($id)
     {
         $event = Event::findOrFail($id);
-        $event->time = Carbon::createFromFormat('H:i:s', $event->time)->format('H:i');
         return response()->json($event);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, string $id)
     {
-        $eventData = $request->except(['image']);
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $imagePath = $request->file('image')->store('public/events');
-            $eventData['image'] = basename($imagePath);
-        }
-
-        $event->update($eventData);
-
-        return redirect()->route('admin.events')->with('success', 'Evento actualizado con éxito');
+        //
     }
 
     /**
@@ -93,6 +80,6 @@ class EventManagementController extends Controller
         $event = Event::findOrFail($id);
         $event->delete();
 
-        return redirect()->route('admin.events')->with('success', 'Evento eliminado con éxito.');
+        return response()->json(['message' => 'Evento eliminado con éxito.']);
     }
 }

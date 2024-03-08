@@ -31,11 +31,12 @@ class AuthenticatedSessionController extends Controller
 
         //REDIRECCION POST-LOGIN BASADA EN ROLES
         if (Auth::user()->role === 'administrador') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.events');
         } else if (Auth::user()->role === 'creador_eventos') {
-            return redirect()->route('creator.dashboard');
+            return redirect()->route('creator.events');
+        } else if (Auth::user()->role === 'asistente') {
+            return redirect()->route('user.agenda');
         }
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

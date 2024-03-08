@@ -6,11 +6,12 @@
         <h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
             {{ __('Categorías') }}
         </h2>
-        <x-secondary-button @click="isOpen = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Añadir Categoría
-        </x-secondary-button>
+        <div>
+            <x-secondary-button @click="isOpen = true">
+                Añadir Categoría
+            </x-secondary-button>
+        </div>
         @include('components.add-category-modal')
-
     </div>
     @endsection
 
@@ -36,8 +37,8 @@
                     return [$category->id, $category->name, $deleteButton];
                     })->toArray();
                     @endphp
-                    <x-responsive-table :headers="$headers" :rows="$rows" />
                     {{ $categories->links() }}
+                    <x-responsive-table :headers="$headers" :rows="$rows" />
 
                     @else
                     <p>No hay categorías disponibles.</p>
@@ -46,5 +47,5 @@
             </div>
         </div>
     </div>
-
-    @endsection
+</div>
+@endsection

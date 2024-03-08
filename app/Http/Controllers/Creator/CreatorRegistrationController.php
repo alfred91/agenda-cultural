@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Creator;
 
 use App\Models\User;
 use App\Models\Event;
@@ -8,9 +8,8 @@ use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminRegistrationController extends Controller
+class CreatorRegistrationController extends Controller
 {
-
     public function index($eventId)
     {
         $registrations = Registration::where('event_id', $eventId)
@@ -32,7 +31,7 @@ class AdminRegistrationController extends Controller
     {
         $events = Event::all();
         $users = User::all();
-        return view('admin.registrations.create', compact('events', 'users'));
+        return view('creator.registrations.create', compact('events', 'users'));
     }
 
     public function store(Request $request)
@@ -46,14 +45,14 @@ class AdminRegistrationController extends Controller
 
         Registration::create($validatedData);
 
-        return redirect()->route('admin.events')->with('success', 'Inscripción creada.');
+        return redirect()->route('creator.events')->with('success', 'Inscripción creada.');
     }
 
     public function edit(Registration $registration)
     {
         $events = Event::all();
         $users = User::all();
-        return view('admin.registrations.edit', compact('registration', 'events', 'users'));
+        return view('creator.registrations.edit', compact('registration', 'events', 'users'));
     }
 
     public function update(Request $request, Registration $registration)
@@ -67,14 +66,14 @@ class AdminRegistrationController extends Controller
 
         $registration->update($validatedData);
 
-        return redirect()->route('admin.events')->with('success', 'Inscripción actualizada.');
+        return redirect()->route('creator.events')->with('success', 'Inscripción actualizada.');
     }
 
     public function destroy(Registration $registration)
     {
         $registration->delete();
 
-        return redirect()->route('admin.events')->with('success', 'Inscripción eliminada.');
+        return redirect()->route('creator.events')->with('success', 'Inscripción eliminada.');
     }
 
     public function cancel(Request $request, $registrationId)

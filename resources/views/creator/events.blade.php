@@ -1,16 +1,16 @@
-@extends('layouts.admin')
+@extends('layouts.creator')
 @php
-$rolePrefix = 'admin';
+$rolePrefix = 'creator';
 @endphp
 <div x-data="eventModal({ rolePrefix: '{{ $rolePrefix }}' })">
-    @include('components.add-event-modal', ['route' => 'admin.events.store'])
+    @include('components.add-event-modal', ['route' => 'creator.events.store'])
     @include('components.edit-event-modal')
     @include('components.registrations-modal')
 
     @section('header')
     <div class="flex justify-between items-center">
         <h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
-            {{ __('Eventos') }}
+            {{ __('Panel de Gestión de Eventos') }}
         </h2>
         <x-secondary-button @click="$dispatch('open-add-event-modal')">
             Añadir Evento
@@ -29,7 +29,7 @@ $rolePrefix = 'admin';
                     $rows = $events->map(function ($event) {
                     $registrationsButton = '<button @click="$dispatch(\'open-registrations-modal\', { id: '.$event->id.' })" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 ml-8 px-2 rounded mr-2"><i class="fas fa-list-alt"></i></button>';
                     $editButton = '<button @click="$dispatch(\'open-edit-event-modal\', { id: '.$event->id.' })" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded mr-2"><i class="fas fa-edit"></i></button>';
-                    $deleteButton = '<form action="'.route('admin.events.destroy', $event->id).'" method="POST" onsubmit="return confirm(\'¿Estás seguro de que quieres eliminar este evento?\');" class="inline">
+                    $deleteButton = '<form action="'.route('creator.events.destroy', $event->id).'" method="POST" onsubmit="return confirm(\'¿Estás seguro de que quieres eliminar este evento?\');" class="inline">
                         '.csrf_field().'
                         '.method_field('DELETE').'
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded"><i class="fas fa-trash"></i></button>
@@ -40,7 +40,6 @@ $rolePrefix = 'admin';
                     $status = $event->status === 'created' ? 'Creado' : ($event->status === 'finished' ? 'Finalizado' : ($event->status === 'cancelled' ? 'Cancelado' : $event->status));
 
                     return [
-
                     $event->id,
                     $event->name,
                     $event->date,
@@ -60,7 +59,6 @@ $rolePrefix = 'admin';
                     })->toArray();
                     @endphp
 
-                    {{ $events->links() }}
                     <x-responsive-table :headers="$headers" :rows="$rows" />
                 </div>
             </div>
@@ -96,7 +94,7 @@ $rolePrefix = 'admin';
             , async fetchEvent(eventId) {
 
                 try {
-                    const response = await fetch(`/admin/events/${eventId}/edit`);
+                    const response = await fetch(`/creator/events/${eventId}/edit`);
                     if (!response.ok) throw new Error('Error al cargar el evento');
                     const data = await response.json();
                     this.event = data;
@@ -107,7 +105,7 @@ $rolePrefix = 'admin';
             }
             , async loadRegistrations(eventId) {
                 try {
-                    const response = await fetch(`/admin/events/${eventId}/registrations`);
+                    const response = await fetch(`/creator/events/${eventId}/registrations`);
                     if (!response.ok) throw new Error('Error al cargar las inscripciones');
                     const data = await response.json();
                     this.registrations = data;
@@ -118,7 +116,7 @@ $rolePrefix = 'admin';
             }
             , async cancelRegistration(registrationId) {
                 try {
-                    const response = await fetch(`/admin/registrations/${registrationId}/cancel`, {
+                    const response = await fetch(`/creator/registrations/${registrationId}/cancel`, {
                         method: 'PATCH'
                         , headers: {
                             'Content-Type': 'application/json'
