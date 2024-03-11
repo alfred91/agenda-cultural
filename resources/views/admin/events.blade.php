@@ -1,7 +1,9 @@
 @extends('layouts.admin')
-@php
+
+@php // AGREGUÉ UN PREFIJO DE ROL PARA REUTILIZAR EL MODAL DE EDITAR EVENTOS CAMBIANDO UNA PRATE DE LA RUTA
 $rolePrefix = 'admin';
 @endphp
+
 <div x-data="eventModal({ rolePrefix: '{{ $rolePrefix }}' })">
     @include('components.add-event-modal', ['route' => 'admin.events.store'])
     @include('components.edit-event-modal')
@@ -9,7 +11,7 @@ $rolePrefix = 'admin';
 
     @section('header')
     <div class="flex justify-between items-center">
-        <h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-blue-400 dark:text-blue-800 leading-tight">
             {{ __('Eventos') }}
         </h2>
         <x-secondary-button @click="$dispatch('open-add-event-modal')">
@@ -69,6 +71,7 @@ $rolePrefix = 'admin';
 </div>
 @endsection
 <script>
+    // FUNCIÓN PARA CONTROLAR LA APERTURA DE LOS 3 MODALES
     function eventModal(data) {
         return {
             isOpenAddEventModal: false

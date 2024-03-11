@@ -13,23 +13,39 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- MENSAJES DEL CONTROLADOR -->
+    @if(session('error'))
+    <script>
+        alert('{{ session("error") }}');
+
+    </script>
+    @endif
+
+    @if(session('success'))
+    <script>
+        alert('{{ session("success") }}');
+
+    </script>
+    @endif
+
 </head>
-<body class="bg-gray-50 dark:bg-gray-200 font-sans antialiased">
-    <div class="min-h-screen">
+<body class="flex flex-col min-h-screen bg-blue-50 dark:bg-gray-200 font-sans antialiased">
+    <div class="flex-grow">
         @include('components.navbar')
 
         <!-- Page Heading -->
         <header class="bg-white dark:bg-gray-400 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
                 @yield('header')
             </div>
         </header>
 
         <!-- Page Content -->
-        <main>
+        <main class="flex-grow overflow-y-auto">
             @yield('content')
         </main>
     </div>
-    <x-footer />
+    <x-footer-admin />
 </body>
 </html>

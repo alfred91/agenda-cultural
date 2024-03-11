@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('header')
-<h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
+<h2 class="font-semibold text-xl text-blue-400 dark:text-blue-800 leading-tight">
     {{ __('Usuarios') }}
 </h2>
 @endsection

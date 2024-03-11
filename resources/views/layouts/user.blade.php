@@ -13,6 +13,21 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- MENSAJES DEL CONTROLADOR -->
+    @if(session('error'))
+    <script>
+        alert('{{ session("error") }}');
+
+    </script>
+    @endif
+
+    @if(session('success'))
+    <script>
+        alert('{{ session("success") }}');
+
+    </script>
+    @endif
 </head>
 <body class="bg-gray-50 dark:bg-gray-200 font-sans antialiased">
     <div class="min-h-screen">

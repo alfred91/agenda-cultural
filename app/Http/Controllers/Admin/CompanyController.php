@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Company;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CompanyController extends Controller
 {
@@ -14,6 +15,11 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::paginate(5);
+        // LIMITAR LA CANTIDAD DE CARACTERES QUE SE MUESTRAN EN LA TABLA
+        $companies->transform(function ($company) {
+            $company->extra_info = Str::limit($company->extra_info, 60, '...');
+            return $company;
+        });
         return view('admin.company', compact('companies'));
     }
 
@@ -33,7 +39,7 @@ class CompanyController extends Controller
 
         Company::create($request->all());
 
-        return redirect()->route('admin.company')->with('success', 'Empresa creada con éxito.');
+        return back()->with('success', 'Empresa creada con éxito.');
     }
 
     /**
@@ -42,6 +48,6 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route("admin.company")->with('success', 'Empresa eliminada con éxito.');
+        return back()->with('success', 'Empresa eliminada con éxito.');
     }
 }

@@ -1,6 +1,6 @@
 <div x-show="isOpenRegistrationsModal" x-cloak class="fixed inset-0 bg-gray-800 bg-opacity-40 overflow-y-auto h-full w-full" @click.away="isOpenRegistrationsModal = false">
-    <div class="flex items-center justify-center min-h-screen p-4">
-        <div class="relative w-auto max-w-lg mx-auto bg-white rounded-lg shadow-xl">
+    <div class="flex items-center justify-center text-center min-h-screen p-4">
+        <div class="relative w-auto max-w-xl mx-auto bg-white rounded-lg shadow-xl">
             <div class="p-6">
                 <h3 class="text-2xl font-semibold text-center text-gray-900 mb-4">Inscripciones del Evento</h3>
                 <div class="mt-2">
@@ -22,7 +22,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                            <tbody class="bg-white divide-y divide-gray-200 text-center">
                                 <template x-for="registration in registrations" :key="registration.id">
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="registration.user_name"></td>

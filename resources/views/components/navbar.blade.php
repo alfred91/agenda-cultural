@@ -1,10 +1,10 @@
-<nav x-data="{ open: false }" class="bg-gray-200 dark:bg-gray-900 shadow">
+<nav x-data="{ open: false }" class="bg-blue-600 dark:bg-blue-800 shadow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <x-application-logo class="block h-10 w-auto text-gray-400" />
+                    <x-application-logo class="block h-10 w-auto text-gray-200" />
                 </div>
 
                 <!-- NAVBAR DINAMICO, POR ROLES -->
@@ -14,31 +14,31 @@
                     @case('administrador')
 
                     <x-nav-link :href="route('admin.events')" :active="request()->routeIs('admin.events')">
-                        {{ __('Eventos') }}
+                        {{ __('EVENTOS') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
-                        {{ __('Usuarios') }}
+                        {{ __('USUARIOS') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.category')" :active="request()->routeIs('admin.category')">
-                        {{ __('Categoría') }}
+                        {{ __('CATEGORÍA') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.experiences')" :active="request()->routeIs('admin.experiences')">
-                        {{ __('Experiencias') }}
+                        {{ __('EXPERIENCIAS') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.company')" :active="request()->routeIs('admin.company')">
-                        {{ __('Empresas') }}
+                        {{ __('EMPRESAS') }}
                     </x-nav-link>
                     @break
 
                     @case('creador_eventos')
                     <x-nav-link :href="route('creator.events')" :active="request()->routeIs('creator.events')">
-                        {{ __('Mis Eventos') }}
+                        {{ __('MIS EVENTOS') }}
                     </x-nav-link>
                     @break
 
                     @default
                     <x-nav-link :href="route('user.agenda')" :active="request()->routeIs('user.agenda')">
-                        {{ __('Inicio') }}
+                        {{ __('INICIO') }}
                     </x-nav-link>
 
                     @endswitch

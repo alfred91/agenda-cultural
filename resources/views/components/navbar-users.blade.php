@@ -1,23 +1,25 @@
 <!-- resources/views/components/navbar-users.blade.php -->
-<nav class="bg-red-600 shadow" x-data="{ open: false }">
-    <div class="max-w-7xl h-20 mx-auto px-4 sm:px-6 lg:px-8">
+<nav class="bg-red-600 shadow fixed min-w-full z-50" x-data="{ open: false } ">
+    <div class=" max-w-7xl h-20 mx-auto px-4 sm:px-6 lg:px-8 ">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center mr-10">
-                    <!-- Añadir margen a la derecha -->
-                    <a href="{{ route('user.agenda') }}">
+                    <a href="{{ route('user.index') }}">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <x-application-logo class="block h-10 w-auto text-gray-400" />
+                            <h1 class="block h-10 w-auto text-2xl mt-6 ml-2 text-white">GARRUCHA
+                                <p class="text-xs text-gray-950">CITY OF GASTRONOMY</p>
+                            </h1>
                         </div>
                     </a>
                 </div>
-                <div class="hidden sm:block sm:ml-6">
+                <div class="hidden sm:block mt-4 sm:ml-6">
                     <div class="flex space-x-4">
-                        <a href="{{ route('user.agenda') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Inicio</a>
+                        <a href="{{ route('user.index') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Inicio</a>
                         <a href="{{ route('user.agenda') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Agenda</a>
-                        <a href="{{ route('user.agenda') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Explora</a>
-                        <a href="{{ route('user.agenda') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Experiencias</a>
+                        <a href="{{ route('user.explore') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Explora</a>
+                        <a href="{{ route('user.experiences') }}" class="px-3 py-2 rounded-md text-lg font-medium text-white uppercase hover:bg-red-600 custom-hover">Experiencias</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +32,6 @@
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </button>
-
                 <!-- Dropdown Menu -->
                 <div x-show="isDropdownOpen" @click.away="isDropdownOpen = false" class="absolute z-50 w-48 rounded-md shadow-lg origin-top-right right-0" style="display: none; top: 3rem;">
                     <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white shadow-xs">

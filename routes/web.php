@@ -4,13 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ExperienceController;
-use App\Http\Controllers\Admin\UserManagementController;
-use App\Http\Controllers\Admin\EventManagementController;
-use App\Http\Controllers\Admin\AdminRegistrationController;
-use App\Http\Controllers\Creator\CreatorEventController;
-use App\Http\Controllers\Creator\CreatorRegistrationController;
 use App\Http\Controllers\User\UserEventController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\User\UserCategoryController;
+use App\Http\Controllers\User\UserExperienceController;
+use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Creator\CreatorEventController;
+use App\Http\Controllers\Admin\EventManagementController;
+use App\Http\Controllers\User\UserRegistrationController;
+use App\Http\Controllers\Admin\AdminRegistrationController;
+use App\Http\Controllers\Creator\CreatorRegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +38,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // RUTAS USUARIOS:
 Route::middleware(['auth', 'verified', 'role:asistente'])->group(function () {
-    Route::get('/agenda', [UserEventController::class, 'index'])->name('user.agenda');
-    Route::get('/events/{event}', [UserEventController::class, 'show'])->name('user.events.show');
+
+    Route::get('/', [UserEventController::class, 'index'])->name('user.index');
+    Route::get('/agenda', [UserEventController::class, 'agenda'])->name('user.agenda');
+    Route::get('/agenda/{period}', [UserEventController::class, 'index'])->name('user.agenda.filter');
+    Route::get('/events/{event}', [UserEventController::class, 'show'])->name('user.event');
+
+    // CATEGORÍAS
+    Route::get('categories', [UserCategoryController::class, 'index'])->name('user.categories');
+    Route::get('categories/{categoryId}', [UserCategoryController::class, 'show'])->name('user.categories.show');
+
+    // EXPLORA
+    Route::get('/explore', function () {
+        return view('user.explore');
+    })->name('user.explore');
+    // EXPERIENCIAS
+    Route::get('experiences', [UserExperienceController::class, 'index'])->name('user.experiences');
+    Route::get('experiences/{id}', [UserExperienceController::class, 'show'])->name('user.experiences.show');
+
+    // INSCRIPCIONES
+    Route::get('registrations', [UserRegistrationController::class, 'index'])->name('user.registrations.index');
+    Route::get('registrations/create/{eventId}', [UserRegistrationController::class, 'create'])->name('user.registrations.create');
+    Route::post('registrations', [UserRegistrationController::class, 'store'])->name('user.registrations.store');
 });
+
 
 // RUTAS ADMIN:
 Route::prefix('admin')->middleware(['auth', 'verified', 'role:administrador'])->group(function () {

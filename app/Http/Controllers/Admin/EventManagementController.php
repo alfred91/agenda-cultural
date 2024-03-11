@@ -54,9 +54,8 @@ class EventManagementController extends Controller
 
         Event::create($eventData);
 
-        return redirect()->route('admin.events')->with('success', 'Evento creado con éxito.');
+        return back()->with('success',  'Evento creado con éxito.');
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -82,7 +81,7 @@ class EventManagementController extends Controller
 
         $event->update($eventData);
 
-        return redirect()->route('admin.events')->with('success', 'Evento actualizado con éxito');
+        return back()->with('success',  'Evento actualizado con éxito');
     }
 
     /**
@@ -93,6 +92,6 @@ class EventManagementController extends Controller
         $event = Event::findOrFail($id);
         $event->delete();
 
-        return redirect()->route('admin.events')->with('success', 'Evento eliminado con éxito.');
+        return back()->with('success', 'Evento eliminado con éxito.');
     }
 }

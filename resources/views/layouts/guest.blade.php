@@ -15,15 +15,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
-<body class="font-sans antialiased h-full bg-white dark:bg-gray-900">
+<body class="font-sans antialiased h-full bg-red-500 dark:bg-red-600 text-shadow">
     <div class="flex min-h-full">
-        <div class="w-2/3 bg-cover bg-center" style="background-image: url('/images/garrucha.avif');"></div>
-        <div class="w-1/3 flex flex-col justify-center items-start p-12 bg-gray-50 dark:bg-gray-800 content-with-diagonal-bg">
+        <div class="w-2/3 bg-cover bg-center" style="background-image: url('{{ asset('images/garrucha.avif') }}');"></div>
+        <div class="w-1/3 flex flex-col justify-center items-start p-12 bg-blue-50 dark:bg-blue-300 content-with-diagonal-bg">
             <h1 class="text-5xl font-bold text-gray-900 dark:text-white mb-4">Agenda Cultural Garrucha</h1>
-            <p class="text-gray-600 dark:text-gray-300 text-lg">
+            <p class="text-gray-600 dark:text-white text-xl">
                 Descubre los mejores eventos culturales en corazón del levante almeriense.
             </p>
-
             <div class="mt-6">
                 {{ $slot }}
             </div>

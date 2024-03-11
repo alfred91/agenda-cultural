@@ -48,7 +48,7 @@ class CreatorEventController extends Controller
 
         Event::create($eventData);
 
-        return redirect()->route('creator.events')->with('success', 'Evento creado con éxito.');
+        return back()->with('success', 'Evento creado con éxito.');
     }
 
 
@@ -70,7 +70,7 @@ class CreatorEventController extends Controller
 
         $event->update($eventData);
 
-        return redirect()->route('creator.events')->with('success', 'Evento actualizado con éxito');
+        return back()->with('success', 'Evento actualizado con éxito');
     }
 
     public function destroy($id)
@@ -78,6 +78,6 @@ class CreatorEventController extends Controller
         $event = Event::findOrFail($id);
         $event->update(['status' => 'cancelled']);
 
-        return redirect()->route('creator.events')->with('success', 'Evento cancelado con éxito.');
+        return back()->with('success', 'Evento cancelado con éxito.');
     }
 }

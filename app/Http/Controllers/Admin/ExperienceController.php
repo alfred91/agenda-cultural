@@ -15,7 +15,7 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $experiences = Experience::paginate(5);
+        $experiences = Experience::paginate(6);
         $companies = Company::all();
         return view('admin.experiences', compact('experiences', 'companies'));
     }
@@ -51,7 +51,6 @@ class ExperienceController extends Controller
             $imagePath = $request->file('image')->store('public/experiences');
             $experience->image = basename($imagePath);
         }
-
         $experience->save();
 
         return redirect()->route('admin.experiences')->with('success', 'Experiencia añadida con éxito.');
@@ -97,10 +96,9 @@ class ExperienceController extends Controller
             $imagePath = $request->file('image')->store('public/experiences');
             $experience->image = basename($imagePath);
         }
-
         $experience->save();
 
-        return redirect()->route('admin.experiences')->with('success', 'Experiencia actualizada con éxito.');
+        return back()->with('success', 'Experiencia actualizada con éxito.');
     }
 
     /**
@@ -111,6 +109,6 @@ class ExperienceController extends Controller
         $experience = Experience::findOrFail($id);
         $experience->delete();
 
-        return Redirect::route('admin.experiences')->with('success', 'Experiencia eliminada con éxito.');
+        return back()->with('success', 'Experiencia eliminada con éxito.');
     }
 }

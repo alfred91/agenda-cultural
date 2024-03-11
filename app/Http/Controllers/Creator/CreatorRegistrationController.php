@@ -45,7 +45,7 @@ class CreatorRegistrationController extends Controller
 
         Registration::create($validatedData);
 
-        return redirect()->route('creator.events')->with('success', 'Inscripción creada.');
+        return back()->with('success', 'Inscripción creada.');
     }
 
     public function edit(Registration $registration)
@@ -66,14 +66,14 @@ class CreatorRegistrationController extends Controller
 
         $registration->update($validatedData);
 
-        return redirect()->route('creator.events')->with('success', 'Inscripción actualizada.');
+        return back()->with('success', 'Inscripción actualizada.');
     }
 
     public function destroy(Registration $registration)
     {
         $registration->delete();
 
-        return redirect()->route('creator.events')->with('success', 'Inscripción eliminada.');
+        return back()->with('success', 'Inscripción eliminada.');
     }
 
     public function cancel(Request $request, $registrationId)

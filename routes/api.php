@@ -53,6 +53,5 @@ Route::get('/token', function (Request $request) {
         $token = $user->createToken('token')->plainTextToken;
         return response()->json(['token' => $token]);
     }
-
     return response()->json(['message' => 'Usuario no encontrado']);
 });

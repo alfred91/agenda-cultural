@@ -3,7 +3,7 @@
 
 <div x-data="{ isOpen: false }">
     <div class="flex justify-between">
-        <h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-blue-400 dark:text-blue-800 leading-tight">
             {{ __('Empresas') }}
         </h2>
         <div>

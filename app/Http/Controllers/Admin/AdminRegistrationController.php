@@ -46,7 +46,7 @@ class AdminRegistrationController extends Controller
 
         Registration::create($validatedData);
 
-        return redirect()->route('admin.events')->with('success', 'Inscripción creada.');
+        return back()->with('success', 'Inscripción creada.');
     }
 
     public function edit(Registration $registration)
@@ -67,17 +67,17 @@ class AdminRegistrationController extends Controller
 
         $registration->update($validatedData);
 
-        return redirect()->route('admin.events')->with('success', 'Inscripción actualizada.');
+        return back()->with('success', 'Inscripción actualizada.');
     }
 
     public function destroy(Registration $registration)
     {
         $registration->delete();
 
-        return redirect()->route('admin.events')->with('success', 'Inscripción eliminada.');
+        return back()->with('success', 'Inscripción eliminada.');
     }
 
-    public function cancel(Request $request, $registrationId)
+    public function cancel($registrationId)
     {
         $registration = Registration::findOrFail($registrationId);
         $registration->update(['status' => 'cancelled']);

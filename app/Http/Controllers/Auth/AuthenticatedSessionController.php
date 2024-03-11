@@ -23,19 +23,18 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+    // REDIRECCION POST-LOGIN BASADA EN ROLES
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        //REDIRECCION POST-LOGIN BASADA EN ROLES
         if (Auth::user()->role === 'administrador') {
             return redirect()->route('admin.events');
         } else if (Auth::user()->role === 'creador_eventos') {
             return redirect()->route('creator.events');
         } else if (Auth::user()->role === 'asistente') {
-            return redirect()->route('user.agenda');
+            return redirect()->route('user.index');
         }
         return redirect()->intended(RouteServiceProvider::HOME);
     }

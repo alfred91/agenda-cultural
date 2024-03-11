@@ -1,7 +1,9 @@
 @extends('layouts.creator')
-@php
+
+@php // AGREGUÉ UN PREFIJO DE ROL PARA REUTILIZAR EL MODAL DE EDITAR EVENTOS CAMBIANDO UNA PRATE DE LA RUTA
 $rolePrefix = 'creator';
 @endphp
+
 <div x-data="eventModal({ rolePrefix: '{{ $rolePrefix }}' })">
     @include('components.add-event-modal', ['route' => 'creator.events.store'])
     @include('components.edit-event-modal')
@@ -9,7 +11,7 @@ $rolePrefix = 'creator';
 
     @section('header')
     <div class="flex justify-between items-center">
-        <h2 class="font-semibold text-xl text-blue-200 dark:text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-blue-400 dark:text-blue-800 leading-tight">
             {{ __('Panel de Gestión de Eventos') }}
         </h2>
         <x-secondary-button @click="$dispatch('open-add-event-modal')">
