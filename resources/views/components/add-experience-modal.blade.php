@@ -9,6 +9,7 @@
                         <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
                         <input type="text" name="name" id="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
+
                     <div class="w-1/2">
                         <label for="company_id" class="block text-sm font-medium text-gray-700">Empresa:</label>
                         <select name="company_id" id="company_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -24,6 +25,7 @@
                     <label for="short_description" class="block text-sm font-medium text-gray-700">Descripción Corta:</label>
                     <textarea name="short_description" id="short_description" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
                 </div>
+
                 <div class="mt-4">
                     <label for="long_description" class="block text-sm font-medium text-gray-700">Descripción Larga:</label>
                     <textarea name="long_description" id="long_description" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
@@ -34,26 +36,27 @@
                         <label for="start_date" class="block text-sm font-medium text-gray-700">Fecha de Inicio:</label>
                         <input type="date" name="start_date" id="start_date" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
+
                     <div class="w-1/3">
                         <label for="date_text" class="block text-sm font-medium text-gray-700">Texto de Fecha:</label>
                         <input type="text" name="date_text" id="date_text" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
+
                     <div class="w-1/3">
                         <label for="price_per_person" class="block text-sm font-medium text-gray-700">Precio por Persona:</label>
                         <input type="number" name="price_per_person" id="price_per_person" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
-
                 <div class="mt-4">
                     <label for="link" class="block text-sm font-medium text-gray-700">Link:</label>
                     <input type="url" name="link" id="link" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
+
                 <div class="mt-4">
                     <label for="image" class="block text-sm font-medium text-gray-700">Imagen:</label>
                     <input type="file" name="image" id="image" class="mt-1 block w-full">
                 </div>
-
 
                 <div class="mt-6 flex justify-end space-x-3">
                     <x-danger-button type="button" @click="isOpenAddExperienceModal = false">

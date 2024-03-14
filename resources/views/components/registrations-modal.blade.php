@@ -28,7 +28,6 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="registration.user_name"></td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="registration.num_tickets"></td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="{'received': 'Recibida', 'confirmed': 'Confirmada', 'cancelled': 'Cancelada'}[registration.status]"></td>
-
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <x-danger-button @click="cancelRegistration(registration.id)" x-show="registration.status !== 'cancelled'">Cancelar</x-danger-button>
                                         </td>

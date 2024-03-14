@@ -10,7 +10,9 @@ use App\Http\Controllers\Controller;
 
 class AdminRegistrationController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index($eventId)
     {
         $registrations = Registration::where('event_id', $eventId)
@@ -27,14 +29,18 @@ class AdminRegistrationController extends Controller
 
         return response()->json($registrations);
     }
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         $events = Event::all();
         $users = User::all();
         return view('admin.registrations.create', compact('events', 'users'));
     }
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -55,7 +61,9 @@ class AdminRegistrationController extends Controller
         $users = User::all();
         return view('admin.registrations.edit', compact('registration', 'events', 'users'));
     }
-
+    /**
+     * Actualizar una inscripcion
+     */
     public function update(Request $request, Registration $registration)
     {
         $validatedData = $request->validate([
@@ -69,14 +77,18 @@ class AdminRegistrationController extends Controller
 
         return back()->with('success', 'Inscripción actualizada.');
     }
-
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Registration $registration)
     {
         $registration->delete();
 
         return back()->with('success', 'Inscripción eliminada.');
     }
-
+    /**
+     * Cancela una inscripción.
+     */
     public function cancel($registrationId)
     {
         $registration = Registration::findOrFail($registrationId);

@@ -11,8 +11,8 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(auth()->check())
                     @switch(auth()->user()->role)
-                    @case('administrador')
 
+                    @case('administrador')
                     <x-nav-link :href="route('admin.events')" :active="request()->routeIs('admin.events')">
                         {{ __('EVENTOS') }}
                     </x-nav-link>
@@ -40,7 +40,6 @@
                     <x-nav-link :href="route('user.agenda')" :active="request()->routeIs('user.agenda')">
                         {{ __('INICIO') }}
                     </x-nav-link>
-
                     @endswitch
                     @endif
                 </div>

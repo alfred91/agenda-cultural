@@ -14,7 +14,6 @@
                     <x-secondary-button type="submit">
                         Añadir
                     </x-secondary-button>
-
                 </div>
             </form>
         </div>

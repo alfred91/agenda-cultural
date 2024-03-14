@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration Received</title>
+    <title>Inscripción recibida</title>
 </head>
 <body>
-    <h1>Registration Received</h1>
-    <p>Hello {{ $user->name }},</p>
-    <p>Thank you for registering for the event "{{ $event->name }}". You have registered for {{ $num_tickets }} tickets.</p>
-    <p>Best regards,</p>
-    <p>Your Event Organizer</p>
+    <h1>Inscripción recibida<< /h1>
+            <p>Hola {{ $user->name }},</p>
+            <p>Gracias por registrarte en el evento: "{{ $event->name }}". Tienes {{ $num_tickets }} tickets.</p>
+            <p>Saludos,</p>
+            <p>Alfredo - Agenda Cultural</p>
 </body>
 </html>

@@ -40,11 +40,9 @@
                     </div>
                 </div>
             </div>
-
             <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                 @csrf
             </form>
-
             <div class="-mr-2 flex sm:hidden">
                 <!-- Mobile menu button -->
                 <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-500 hover:bg-red-600 focus:outline-none focus:bg-red-600 focus:text-gray-500">
@@ -58,7 +56,6 @@
             </div>
         </div>
     </div>
-
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="sm:hidden" x-show="open" @click.away="open = false">
         <div class="pt-2 pb-3 space-y-1">

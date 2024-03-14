@@ -74,7 +74,6 @@ function eventModal(data) {
     }
 }
 
-// Asegúrate de llamar a la función init() después de definirla
 document.addEventListener('DOMContentLoaded', () => {
     const modal = eventModal({ rolePrefix: 'admin' });
     modal.init();

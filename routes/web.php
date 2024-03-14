@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified', 'role:asistente'])->group(function () {
     Route::get('/explore', function () {
         return view('user.explore');
     })->name('user.explore');
+
     // EXPERIENCIAS
     Route::get('experiences', [UserExperienceController::class, 'index'])->name('user.experiences');
     Route::get('experiences/{id}', [UserExperienceController::class, 'show'])->name('user.experiences.show');
@@ -102,10 +103,6 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'role:administrador'])->
 
 //RUTAS CREADOR EVENTOS:
 Route::prefix('creator')->middleware(['auth', 'verified', 'role:creador_eventos'])->group(function () {
-
-    Route::get('/dashboard', function () {
-        return view('creator.dashboard');
-    })->name('creator.dashboard');
 
     //EVENTOS:
     Route::get('/events', [CreatorEventController::class, 'index'])->name('creator.events');

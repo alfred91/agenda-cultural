@@ -1,6 +1,6 @@
 @extends('layouts.creator')
 
-@php // AGREGUÉ UN PREFIJO DE ROL PARA REUTILIZAR EL MODAL DE EDITAR EVENTOS CAMBIANDO UNA PRATE DE LA RUTA
+@php // AGREGUÉ UN PREFIJO DE ROL PARA REUTILIZAR EL MODAL DE EDITAR EVENTOS CAMBIANDO UNA PARTE DE LA RUTA
 $rolePrefix = 'creator';
 @endphp
 
@@ -68,6 +68,7 @@ $rolePrefix = 'creator';
     </div>
 </div>
 @endsection
+
 <script>
     function eventModal(data) {
         return {
