@@ -81,17 +81,23 @@ class EventManagementController extends Controller
 
         $event->update($eventData);
 
-        return back()->with('success',  'Evento actualizado con éxito');
+        return back()->with('success',  'Evento actualizado');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
+        // SI EL EVENTO TIENE INSCRIPCIONES MOSTRAMOS UN MENSAJE Y NO SE BORRA
+        if ($event->registrations()->count() > 0) {
+            return back()->with('error', 'El evento no se puede eliminar por que tiene inscripciones asociadas.');
+        }
+        // DE LO CONTRARIO, LO ELIMINAMOS
         $event->delete();
 
-        return back()->with('success', 'Evento eliminado con éxito.');
+        return back()->with('success', 'Evento eliminado');
     }
 }

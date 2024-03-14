@@ -28,6 +28,7 @@
 
     </script>
     @endif
+
 </head>
 <body class="bg-gray-50 dark:bg-gray-200 font-sans antialiased">
     <div class="min-h-screen">

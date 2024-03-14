@@ -58,7 +58,6 @@
                 <!-- Dropdown Menu -->
                 <div x-show="isDropdownOpen" ... @click.away="isDropdownOpen = false" class="absolute z-50 w-48 rounded-md shadow-lg origin-top-right right-0" style="display: none; top: 3rem;">
                     <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white shadow-xs">
-                        <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar Sesión</a>
                     </div>
                 </div>
@@ -88,7 +87,7 @@
             @case('creador_eventos')
 
             <!-- CREADOR EVENTOS -->
-            <x-responsive-nav-link :href="route('creator.dashboard')" :active="request()->routeIs('creator.dashboard')">
+            <x-responsive-nav-link :href="route('creator.events')" :active="request()->routeIs('creator.events')">
                 {{ __('Mis Eventos') }}
             </x-responsive-nav-link>
 

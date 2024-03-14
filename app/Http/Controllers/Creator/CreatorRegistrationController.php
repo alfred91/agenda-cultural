@@ -66,14 +66,14 @@ class CreatorRegistrationController extends Controller
 
         $registration->update($validatedData);
 
-        return back()->with('success', 'Inscripción actualizada.');
+        return back()->with('success', 'Inscripción actualizada');
     }
 
     public function destroy(Registration $registration)
     {
         $registration->delete();
 
-        return back()->with('success', 'Inscripción eliminada.');
+        return back()->with('success', 'Inscripción eliminada');
     }
 
     public function cancel(Request $request, $registrationId)
@@ -81,6 +81,6 @@ class CreatorRegistrationController extends Controller
         $registration = Registration::findOrFail($registrationId);
         $registration->update(['status' => 'cancelled']);
 
-        return response()->json(['message' => 'Inscripción cancelada con éxito.']);
+        return response()->json(['message' => 'Inscripción cancelada']);
     }
 }

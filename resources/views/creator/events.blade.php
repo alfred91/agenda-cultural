@@ -31,7 +31,7 @@ $rolePrefix = 'creator';
                     $rows = $events->map(function ($event) {
                     $registrationsButton = '<button @click="$dispatch(\'open-registrations-modal\', { id: '.$event->id.' })" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 ml-8 px-2 rounded mr-2"><i class="fas fa-list-alt"></i></button>';
                     $editButton = '<button @click="$dispatch(\'open-edit-event-modal\', { id: '.$event->id.' })" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded mr-2"><i class="fas fa-edit"></i></button>';
-                    $deleteButton = '<form action="'.route('creator.events.destroy', $event->id).'" method="POST" onsubmit="return confirm(\'¿Estás seguro de que quieres eliminar este evento?\');" class="inline">
+                    $deleteButton = '<form action="'.route('creator.events.destroy', $event->id).'" method="POST" onsubmit="return confirm(\'¿Estás seguro de que quieres cancelar este evento?\');" class="inline">
                         '.csrf_field().'
                         '.method_field('DELETE').'
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded"><i class="fas fa-trash"></i></button>
