@@ -12,7 +12,7 @@
             <p class="text-gray-600 mb-4">{{ Str::limit($event->description, 100) }}</p>
         </div>
         <div class="flex-shrink-0 w-1/2">
-            <img class="w-full h-48 object-cover" src="{{ asset('storage/events/' . $event->image) }}" alt="Imagen del evento">
+            <img class="w-full h-48 object-cover" src="{{ asset('images/events/' . $event->image) }}" alt="Imagen del evento">
         </div>
         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: rgba(0, 0, 0, 0.568);">
             <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

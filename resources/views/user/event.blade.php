@@ -18,7 +18,7 @@
     <div class="container mx-auto p-4">
         <div class="bg-white shadow-xl rounded-lg overflow-hidden">
             <div class="md:flex">
-                <div class="md:w-1/3 h-full"> @if($event->image) <img src="{{ asset('storage/events/' . $event->image) }}" alt="Imagen del evento" class="w-full h-full object-cover"> @else <img src="{{ asset('images/users.svg') }}" alt="Imagen del evento" class="w-full h-full object-cover"> @endif </div>
+                <div class="md:w-1/3 h-full"> @if($event->image) <img src="{{ asset('images/events/' . $event->image) }}" alt="Imagen del evento" class="w-full h-full object-cover"> @else <img src="{{ asset('images/users.svg') }}" alt="Imagen del evento" class="w-full h-full object-cover"> @endif </div>
                 <div class="md:w-2/3 p-8">
                     <h1 class="text-4xl font-bold text-gray-800">{{ $event->name }}</h1>
                     <p class="mt-2 text-indigo-600 font-semibold">{{ $event->category->name }}</p>

@@ -31,7 +31,7 @@ class EventFactory extends Factory
             'max_tickets_per_person' => $this->faker->numberBetween(1, 10),
             'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory(),
             'user_id' => User::where('role', 'creador_eventos')->inRandomOrder()->first()->id ?? User::factory()->state(['role' => 'creador_eventos']),
-            'image' => $this->faker->imageUrl(640, 480, 'events', true),
+            'image' => $this->faker->numberBetween(1, 10) . '.jpg',
         ];
     }
 }

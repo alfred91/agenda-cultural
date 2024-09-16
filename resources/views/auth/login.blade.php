@@ -3,7 +3,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form class="mt-8 space-y-6" method="POST" action="{{ route('login') }}">
+    <form id="loginForm" class="mt-8 space-y-6" method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -37,8 +37,6 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-
-
             <!-- Botón Regístrate -->
             <x-primary-button class="mr-4 bg-blue-400 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 <a href="{{ route('register') }}" class="inline-flex justify-center w-full h-full">
@@ -49,8 +47,19 @@
             <x-primary-button class="bg-blue-400 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 {{ __('Iniciar Sesión') }}
             </x-primary-button>
-        </div>
-
+            <!-- Botón Continuar como Invitado -->
+            <x-primary-button type="button" class="ml-4 bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="continueAsGuest()">
+                {{ __('Continuar como Invitado') }}
+            </x-primary-button>
         </div>
     </form>
+
+    <script>
+        function continueAsGuest() {
+            document.getElementById('email').value = 'asistente@gmail.com';
+            document.getElementById('password').value = '12345678';
+            document.getElementById('loginForm').submit();
+        }
+
+    </script>
 </x-guest-layout>

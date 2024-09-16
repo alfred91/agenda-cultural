@@ -44,6 +44,7 @@
                     @endif
                 </div>
             </div>
+
             <!-- Settings Dropdown -->
             <div x-data="{ isDropdownOpen: false }" class="relative hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Trigger -->
@@ -56,7 +57,7 @@
                 </button>
 
                 <!-- Dropdown Menu -->
-                <div x-show="isDropdownOpen" ... @click.away="isDropdownOpen = false" class="absolute z-50 w-48 rounded-md shadow-lg origin-top-right right-0" style="display: none; top: 3rem;">
+                <div x-show="isDropdownOpen" @click.away="isDropdownOpen = false" class="absolute z-50 w-48 rounded-md shadow-lg origin-top-right right-0 top-3rem">
                     <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white shadow-xs">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar Sesión</a>
                     </div>
@@ -85,13 +86,9 @@
             @if(auth()->check())
             @switch(auth()->user()->role)
             @case('creador_eventos')
-
-            <!-- CREADOR EVENTOS -->
             <x-responsive-nav-link :href="route('creator.events')" :active="request()->routeIs('creator.events')">
                 {{ __('Mis Eventos') }}
             </x-responsive-nav-link>
-
-            <!-- ADMINISTRADOR -->
             @break
             @case('administrador')
             <x-responsive-nav-link :href="route('admin.events')" :active="request()->routeIs('admin.events')">
@@ -101,7 +98,7 @@
                 {{ __('Usuarios') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.category')" :active="request()->routeIs('admin.category')">
-                {{ __('Categoria') }}
+                {{ __('Categoría') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.experiences')" :active="request()->routeIs('admin.experiences')">
                 {{ __('Experiencias') }}
