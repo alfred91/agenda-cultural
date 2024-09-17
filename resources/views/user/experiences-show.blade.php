@@ -24,19 +24,32 @@
         @foreach ($experiences as $experience)
         <div class="bg-white shadow-md rounded-lg overflow-hidden relative" style="min-width: 280px;">
             <!-- Imagen de experiencia -->
-            <img src="{{ asset('storage/experiences/' . $experience->image) }}" alt="Imagen de experiencia" class="w-full h-48 object-cover">
+            @if ($experience->image)
+            <img src="{{ asset('images/experiences/' . $experience->image) }}" alt="Imagen de experiencia" class="w-full h-48 object-cover">
+            @else
+            <img src="{{ asset('images/experiences/default.jpg') }}" alt="Imagen por defecto" class="w-full h-48 object-cover">
+            @endif
+
             <div class="p-4">
                 <h3 class="text-xl sm:text-2xl font-semibold mb-2 capitalize">{{ $experience->name }}</h3>
                 <p class="text-gray-600 mb-2">{{ Str::limit($experience->short_description, 50) }}</p>
                 <p class="text-gray-500 mb-2">Fecha Inicio: {{ \Carbon\Carbon::parse($experience->start_date)->format('d/m/Y') }}</p>
                 <p class="text-gray-500 mb-2">Precio: {{ number_format($experience->price_per_person, 2) }}€</p>
+
+                <!-- Verificación de que la experiencia tiene una empresa asociada -->
+                @if ($experience->company)
                 <p class="text-gray-500 mb-2">Empresa: {{ $experience->company->name }}</p>
-                <p class="text-gray-500 mb-2">Web: <br> <a href="{{ $experience->company->website }}" target="_blank" class="text-blue-500 underline">{{ $experience->company->website }}</a></p>
+                <p class="text-gray-500 mb-2">Web: <br>
+                    <a href="https://{{ $experience->company->website }}" target="_blank" class="text-blue-500 underline">{{ $experience->company->website }}</a>
+                </p>
                 <div class="mt-4">
-                    <x-danger-button href="{{ $experience->company->website }}">
+                    <x-danger-button href="http://{{ $experience->company->website }}" target="_blank">
                         Reserva Directa Establecimiento
                     </x-danger-button>
                 </div>
+                @else
+                <p class="text-gray-500 mb-2">Empresa no disponible</p>
+                @endif
             </div>
         </div>
         @endforeach

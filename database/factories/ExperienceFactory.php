@@ -26,7 +26,7 @@ class ExperienceFactory extends Factory
             'link' => $this->faker->url,
             'long_description' => $this->faker->text(500),
             'company_id' => Company::inRandomOrder()->first()->id ?? Company::factory(),
-            'image' => $this->faker->imageUrl(640, 480, 'experiences', true),
+            'image' => 'default.jpg',
         ];
     }
 }
