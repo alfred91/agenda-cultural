@@ -1,5 +1,3 @@
-@extends('layouts.admin')
-
 <div x-data="experienceModal()">
     @include('components.add-experience-modal')
     @include('components.edit-experience-modal')
@@ -54,8 +52,32 @@
                     })->toArray();
                     @endphp
 
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-50 dark:bg-gray-800">
+                                    @foreach($headers as $header)
+                                    <th class="px-6 py-2 text-xs text-gray-500 dark:text-gray-300">
+                                        {{ $header }}
+                                    </th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-700">
+                                @foreach($rows as $row)
+                                <tr class="whitespace-nowrap">
+                                    @foreach($row as $cell)
+                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                                        {!! $cell !!}
+                                    </td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
                     {{ $experiences->links() }}
-                    <x-responsive-table :headers="$headers" :rows="$rows" />
                 </div>
             </div>
         </div>
@@ -100,3 +122,4 @@
         }
 
     </script>
+</div>
