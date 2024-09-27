@@ -32,20 +32,41 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'surname' => ['required', 'string', 'max:255'],
+            'age' => ['required', 'integer', 'min:0'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'dni' => ['required', 'string', 'max:9'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'role' => ['required', 'string'],
+            'company_id' => ['nullable', 'exists:companies,id'],
         ]);
 
-        $user = User::create([
+        $userData = [
             'name' => $request->name,
+            'surname' => $request->surname,
+            'age' => $request->age,  // Include age in user data
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+            'dni' => $request->dni,
+            'address' => $request->address,
+            'city' => $request->city,
+            'phone' => $request->phone,
+            'role' => $request->role,
+        ];
+
+        if ($request->role === 'creador_eventos') {
+            $userData['company_id'] = $request->company_id;
+        }
+
+        $user = User::create($userData);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/');
     }
 }

@@ -64,5 +64,15 @@
             <a href="{{ route('user.explore') }}" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-red-600 transition duration-150 ease-in-out">Explora</a>
             <a href="{{ route('user.experiences') }}" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-red-600 transition duration-150 ease-in-out">Experiencias</a>
         </div>
+
+        <!-- Username and Logout -->
+        <div class="border-t border-gray-200">
+            <div class="px-4 py-3">
+                <div class="text-base font-medium text-white">{{ Auth::user()->name }}</div>
+            </div>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                {{ __('Cerrar Sesión') }}
+            </a>
+        </div>
     </div>
 </nav>

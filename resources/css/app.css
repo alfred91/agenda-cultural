@@ -1,18 +1,24 @@
+/* Importación de fuentes y bibliotecas */
 @import "@fortawesome/fontawesome-free/css/all.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Estilos personalizados */
 [x-cloak] {
     display: none !important;
 }
+
+/* Fondo con borde diagonal */
 .content-with-diagonal-bg {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
 }
-/* custom.css */
+
+/* Efecto hover personalizado */
 .custom-hover {
     position: relative;
-    transition: all 0.3s ease;
+    overflow: hidden; /* Para asegurar que el pseudo-elemento no se salga del contenedor */
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .custom-hover::after {
@@ -25,13 +31,130 @@
     background-color: rgba(255, 255, 255, 0.5);
     visibility: hidden;
     transform: scaleX(0);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, visibility 0.3s ease;
 }
 
 .custom-hover:hover::after {
     visibility: visible;
     transform: scaleX(1);
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.8
+    ); /* Color más brillante en hover */
 }
+
+/* Estilo de texto con sombra */
 .text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra más sutil para mejorar legibilidad */
+}
+
+/* Variables de color para temas claro y oscuro */
+:root {
+    --bg-light: #f3f4f6;
+    --bg-dark: #1f2937;
+    --text-light: #1f2937;
+    --text-dark: #f3f4f6;
+    --border-light: #d1d5db;
+    --border-dark: #4b5563;
+}
+
+[data-theme="dark"] {
+    --bg-light: #1f2937;
+    --bg-dark: #f3f4f6;
+    --text-light: #f3f4f6;
+    --text-dark: #1f2937;
+    --border-light: #4b5563;
+    --border-dark: #d1d5db;
+}
+
+/* Aplicar variables de color */
+body {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    font-family: "Figtree", sans-serif; /* Asegura que la fuente se aplique globalmente */
+}
+
+[data-theme="dark"] body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+input,
+select,
+textarea {
+    border-color: var(--border-light);
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    border-color: var(--border-dark);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #3b82f6; /* Color de foco */
+    outline: none;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+    border-color: #2563eb; /* Color de foco en modo oscuro */
+}
+/* Estilos generales para el formulario */
+.login-form {
+    max-width: 400px; /* Máximo ancho para el formulario */
+    margin: 20px auto; /* Centrar el formulario en la pantalla */
+    padding: 20px; /* Espacio interno */
+    background-color: var(--bg-light);
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilos para los campos de entrada */
+input,
+select,
+textarea {
+    width: 100%; /* Que los campos ocupen todo el ancho disponible */
+    padding: 10px; /* Espacio interno */
+    margin: 10px 0; /* Espacio entre los campos */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Botón de inicio de sesión */
+.login-button {
+    background-color: #3b82f6; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    padding: 10px; /* Espacio interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Efecto de transición */
+}
+
+.login-button:hover {
+    background-color: #2563eb; /* Color del botón al pasar el mouse */
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 600px) {
+    .login-form {
+        padding: 15px; /* Ajustar el padding en móviles */
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 14px; /* Disminuir el tamaño de la fuente en móviles */
+    }
+
+    .login-button {
+        font-size: 16px; /* Aumentar el tamaño de la fuente del botón en móviles */
+    }
 }

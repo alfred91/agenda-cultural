@@ -1,26 +1,21 @@
 <x-guest-layout>
-
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form id="loginForm" class="mt-8 space-y-6" method="POST" action="{{ route('login') }}">
+    <form id="loginForm" class="login-form" method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" class="text-gray-700" />
-            <x-text-input id="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-50 dark:text-gray-50  rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm" type="email" name="email" :value="old('email')" required autofocus />
+            <x-text-input id="email" class="block w-full" type="email" name="email" :value="old('email')" placeholder="tu_email@gmail.com" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Contraseña')" class="text-gray-700" />
-            <x-text-input id="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-50 dark:text-gray-50 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm" type="password" name="password" required autocomplete="current-password" />
+            <x-text-input id="password" class="block w-full" type="password" name="password" placeholder="contraseña" required />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <input id="remember_me" name="remember" type="checkbox" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
@@ -36,29 +31,40 @@
             @endif
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <!-- Botón Regístrate -->
-            <x-primary-button class="mr-4 bg-blue-400 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                <a href="{{ route('register') }}" class="inline-flex justify-center w-full h-full">
-                    {{ __('Regístrate') }}
-                </a>
+        <div class="flex flex-wrap items-center justify-end mt-4 gap-2">
+            <x-primary-button type="button" class="w-full sm:w-auto mr-1 ml-1" onclick="openRegisterModal()">
+                {{ __('Regístrate') }}
             </x-primary-button>
-            <!-- Botón Iniciar Sesión -->
-            <x-primary-button class="bg-blue-400 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <x-primary-button class="w-full sm:w-auto mr-1 ml-1 bg-blue-400" type="submit">
                 {{ __('Iniciar Sesión') }}
             </x-primary-button>
-            <!-- Botón Continuar como Invitado -->
-            <x-primary-button type="button" class="ml-4 bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="continueAsGuest()">
+            <x-primary-button type="button" class="w-full sm:w-auto mr-1 ml-1 bg-gray-400" onclick="continueAsGuest()">
                 {{ __('Continuar como Invitado') }}
             </x-primary-button>
         </div>
+
     </form>
+
 
     <script>
         function continueAsGuest() {
-            document.getElementById('email').value = 'asistente@gmail.com';
-            document.getElementById('password').value = '12345678';
-            document.getElementById('loginForm').submit();
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.innerHTML = `
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="email" value="asistente@gmail.com">
+                <input type="hidden" name="password" value="12345678">
+            `;
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.add('hidden');
         }
 
     </script>

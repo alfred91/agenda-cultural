@@ -7,11 +7,10 @@
                     <x-application-logo class="block h-10 w-auto text-gray-200" />
                 </div>
 
-                <!-- NAVBAR DINAMICO, POR ROLES -->
+                <!-- Dynamic Navbar Based on Roles -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(auth()->check())
                     @switch(auth()->user()->role)
-
                     @case('administrador')
                     <x-nav-link :href="route('admin.events')" :active="request()->routeIs('admin.events')">
                         {{ __('EVENTOS') }}
@@ -29,13 +28,11 @@
                         {{ __('EMPRESAS') }}
                     </x-nav-link>
                     @break
-
                     @case('creador_eventos')
                     <x-nav-link :href="route('creator.events')" :active="request()->routeIs('creator.events')">
                         {{ __('MIS EVENTOS') }}
                     </x-nav-link>
                     @break
-
                     @default
                     <x-nav-link :href="route('user.agenda')" :active="request()->routeIs('user.agenda')">
                         {{ __('INICIO') }}
@@ -45,12 +42,12 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
+            <!-- Settings Dropdown (For Desktop) -->
             <div x-data="{ isDropdownOpen: false }" class="relative hidden sm:flex sm:items-center sm:ml-6">
-                <!-- Trigger -->
                 <button @click="isDropdownOpen = !isDropdownOpen" @keydown.escape="isDropdownOpen = false" class="flex items-center space-x-2 text-sm text-gray-200 hover:text-gray-800 focus:outline-none transition">
+                    <!-- Show Username -->
                     <span class="hidden md:inline-block font-medium">{{ Auth::user()->name }}</span>
-                    <!-- Icono de flecha hacia abajo (opcional) para indicar que es un dropdown -->
+                    <!-- Down Arrow Icon (optional) -->
                     <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
@@ -59,7 +56,9 @@
                 <!-- Dropdown Menu -->
                 <div x-show="isDropdownOpen" @click.away="isDropdownOpen = false" class="absolute z-50 w-48 rounded-md shadow-lg origin-top-right right-0 top-3rem">
                     <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white shadow-xs">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar Sesión</a>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            {{ __('Cerrar Sesión') }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -68,7 +67,7 @@
                 @csrf
             </form>
 
-            <!-- Mobile menu button -->
+            <!-- Mobile Menu Button -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-800 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,6 +81,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': !open}" class="sm:hidden">
+        <!-- Dynamic Links Based on User Role -->
         <div class="pt-2 pb-3 space-y-1">
             @if(auth()->check())
             @switch(auth()->user()->role)
@@ -107,8 +107,22 @@
                 {{ __('Empresas') }}
             </x-responsive-nav-link>
             @break
+            @default
+            <x-responsive-nav-link :href="route('user.agenda')" :active="request()->routeIs('user.agenda')">
+                {{ __('Inicio') }}
+            </x-responsive-nav-link>
             @endswitch
             @endif
+        </div>
+
+        <!-- Mobile Username and Logout -->
+        <div class="border-t border-gray-200">
+            <div class="px-4 py-3">
+                <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
+            </div>
+            <x-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Cerrar Sesión') }}
+            </x-responsive-nav-link>
         </div>
     </div>
 </nav>

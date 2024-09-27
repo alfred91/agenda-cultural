@@ -5,7 +5,7 @@
 <div x-data="{ open: false }">
     <div class="py-4 bg-gradient-to-r from-cyan-600 to-blue-500">
         <div class="mt-36">
-            <h1 class="mt-12 text-6xl font-bold text-white text-center text-shadow">agenda</h1>
+            <h1 class="mt-12 text-6xl font-bold text-white text-center text-shadow">Agenda</h1>
             <div class="mb-8 text-center ml-96 pl-96">
                 <a href="{{ route('user.agenda') }}" class="mx-auto text-white font-bold hover:text-gray-300 text-2xl text-shadow">
                     Volver
@@ -59,12 +59,28 @@
     </div>
 
     <div class="text-center mt-4">
+        @if(auth()->check())
+        @if(auth()->user()->email == 'asistente@gmail.com')
+        <!-- Si el usuario es 'asistente@gmail.com', mostrar alerta -->
+        <button onclick="alert('Debes estar registrado para inscribirte al evento.')" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition ease-in-out duration-150">
+            Inscribirse
+        </button>
+        @else
+        <!-- Si es un usuario autenticado diferente a 'asistente@gmail.com', permitir inscripción -->
         <button @click="open = true" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition ease-in-out duration-150">
             Inscribirse
         </button>
+        @endif
+        @else
+        <!-- Si no está autenticado, mostrar alerta -->
+        <button onclick="alert('Debes estar registrado para inscribirte al evento.')" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition ease-in-out duration-150">
+            Inscribirse
+        </button>
+        @endif
     </div>
 
-    <!-- Modal de inscripción -->
+    <!-- Modal de inscripción solo para usuarios autenticados -->
+    @if(auth()->check())
     <div x-show="open" x-cloak class="fixed inset-0 bg-gray-800 bg-opacity-40 overflow-y-auto h-full w-full z-10" @click.away="open = false">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="relative w-full max-w-lg mx-auto bg-white rounded-lg shadow-xl">
@@ -94,5 +110,6 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @endsection
