@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form id="loginForm" class="login-form" method="POST" action="{{ route('login') }}">
+    <form id="loginForm" class="login-form z-50" method="POST" action="{{ route('login') }}">
         @csrf
 
         <div>
@@ -44,7 +44,6 @@
         </div>
 
     </form>
-
 
     <script>
         function continueAsGuest() {

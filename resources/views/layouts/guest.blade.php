@@ -135,8 +135,7 @@
         <!-- Content Section -->
         <div class="w-full md:w-1/3 flex flex-col justify-center items-start p-6 md:p-12 bg-blue-50 dark:bg-blue-300 content-with-diagonal-bg">
             <div class="mt-6">
-                <p class="text-lg md:text-xl text-gray-50 dark:text-gray-900 shadow-black mt-2">Descubre los mejores eventos culturales en el corazón del levante almeriense.</p>
-
+                <p class="text-lg md:text-xl text-gray-900 dark:text-gray-50 shadow-black mt-2">Descubre los mejores eventos culturales en el corazón del levante almeriense.</p>
                 {{ $slot }}
             </div>
         </div>

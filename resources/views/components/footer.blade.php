@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div class="w-full lg:w-auto px-4">
-                <h3 class="text-sm font-semibold uppercase tracking-wider text-center">Síguenos</h3>
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-center">Sígueme</h3>
                 <div class="flex justify-center lg:justify-start mt-4 space-x-4">
                     <div class="flex sm:justify-end mt-4 space-x-4">
                         <a href="#" class="text-gray-400 hover:text-gray-300">
