@@ -15,10 +15,12 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
+        $userRole = $request->user()->role;
 
-        if ($request->user()->role != $role) {
-
-            return redirect("/");
+        if ($userRole !== $role) {
+            if ($userRole === 'administrador') return redirect()->route('admin.events');
+            if ($userRole === 'creador_eventos') return redirect()->route('creator.events');
+            return redirect()->route('user.index');
         }
 
         return $next($request);

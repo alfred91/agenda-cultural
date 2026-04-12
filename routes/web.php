@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CompanyController;
@@ -27,6 +28,12 @@ use App\Http\Controllers\Creator\CreatorRegistrationController;
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $role = Auth::user()->role;
+        if ($role === 'administrador') return redirect()->route('admin.events');
+        if ($role === 'creador_eventos') return redirect()->route('creator.events');
+        return redirect()->route('user.index');
+    }
     return redirect()->route('login');
 });
 
@@ -39,7 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // RUTAS USUARIOS:
 Route::middleware(['auth', 'verified', 'role:asistente'])->group(function () {
 
-    Route::get('/', [UserEventController::class, 'index'])->name('user.index');
+    Route::get('/events', [UserEventController::class, 'index'])->name('user.index');
     Route::get('/agenda', [UserEventController::class, 'agenda'])->name('user.agenda');
     Route::get('/agenda/{period}', [UserEventController::class, 'index'])->name('user.agenda.filter');
     Route::get('/events/{event}', [UserEventController::class, 'show'])->name('user.event');
